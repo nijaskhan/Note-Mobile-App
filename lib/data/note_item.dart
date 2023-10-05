@@ -16,8 +16,12 @@ class NoteItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        print('works');
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (ctx) => ScreenAddnote(type: ActionType.editNote)));
+            builder: (ctx) => ScreenAddnote(
+                  type: ActionType.editNote,
+                  id: id,
+                )));
       },
       child: Column(
         children: [

@@ -14,9 +14,26 @@ class ScreenAddnote extends StatelessWidget {
   final _noteTitleInput = TextEditingController();
   final _noteContentInput = TextEditingController();
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
+    print("came here");
+    if (type == ActionType.editNote) {
+      if (id == null) {
+        print("somehow I am here");
+        Navigator.of(context).pop();
+      } else {
+        final note = NoteApi().getNotebyId(id!);
+        if (note != null) {
+          print(note!.title);
+          _noteTitleInput.text = note!.title ?? 'No title';
+          _noteContentInput.text = note!.content ?? 'No Content';
+        }
+      }
+    }
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
         title: Text(type == ActionType.addNote ? 'Add note' : 'Edit note'),
@@ -80,5 +97,6 @@ class ScreenAddnote extends StatelessWidget {
 
     NoteApi().createNote(_newNote);
     print("note saved");
+    Navigator.of(_scaffoldKey.currentContext!).pop();
   }
 }
