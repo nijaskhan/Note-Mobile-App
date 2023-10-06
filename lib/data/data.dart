@@ -66,7 +66,7 @@ class NoteApi implements ApiCalls {
             _responseAsJson as Map<String, dynamic>);
         noteListNotifier.value.clear();
         noteListNotifier.value.addAll(getNoteResp.data.reversed);
-        // ignore: invalid_use_of_protected_member
+        // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
         noteListNotifier.notifyListeners();
         return getNoteResp.data;
       }
