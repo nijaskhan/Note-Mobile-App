@@ -18,10 +18,8 @@ class ScreenAddnote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("came here");
     if (type == ActionType.editNote) {
       if (id == null) {
-        print("somehow I am here");
         Navigator.of(context).pop();
       } else {
         final note = NoteApi().getNotebyId(id!);
@@ -95,7 +93,8 @@ class ScreenAddnote extends StatelessWidget {
         title: _noteTitleInput.text,
         content: _noteContentInput.text);
 
-    NoteApi().createNote(_newNote);
+    await NoteApi().createNote(_newNote);
+    await NoteApi().getAllNotes();
     print("note saved");
     Navigator.of(_scaffoldKey.currentContext!).pop();
   }

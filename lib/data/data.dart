@@ -12,7 +12,7 @@ abstract class ApiCalls {
   Future<List<NoteModel>> getAllNotes();
 }
 
-class NoteApi extends ApiCalls {
+class NoteApi implements ApiCalls {
   // Singleton instance
   static NoteApi? _instance;
   // Private constructor
@@ -66,8 +66,8 @@ class NoteApi extends ApiCalls {
             _responseAsJson as Map<String, dynamic>);
         noteListNotifier.value.clear();
         noteListNotifier.value.addAll(getNoteResp.data.reversed);
+        // ignore: invalid_use_of_protected_member
         noteListNotifier.notifyListeners();
-        print(getNoteResp.data.toString());
         return getNoteResp.data;
       }
     } catch (e) {
@@ -81,8 +81,6 @@ class NoteApi extends ApiCalls {
     try {
       final _result =
           noteListNotifier.value.firstWhere((note) => note.id == id);
-      print(_result.title);
-
       return _result;
     } catch (e) {
       print(e.toString());
