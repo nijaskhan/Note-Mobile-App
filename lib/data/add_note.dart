@@ -24,9 +24,9 @@ class ScreenAddnote extends StatelessWidget {
       } else {
         final note = NoteApi().getNotebyId(id!);
         if (note != null) {
-          print(note!.title);
-          _noteTitleInput.text = note!.title ?? 'No title';
-          _noteContentInput.text = note!.content ?? 'No Content';
+          print(note.title);
+          _noteTitleInput.text = note.title ?? 'No title';
+          _noteContentInput.text = note.content ?? 'No Content';
         }
       }
     }
