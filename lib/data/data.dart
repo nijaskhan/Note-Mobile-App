@@ -11,6 +11,7 @@ abstract class ApiCalls {
   Future<NoteModel?> createNote(NoteModel value);
   Future<List<NoteModel>> getAllNotes();
   Future<NoteModel?> updateNote(NoteModel value);
+  Future<void> deleteNoteById(String id);
 }
 
 class NoteApi implements ApiCalls {
@@ -31,14 +32,14 @@ class NoteApi implements ApiCalls {
   final dio = Dio();
   final url = Urls();
 
-  ValueNotifier<List<NoteModel>> noteListNotifier = ValueNotifier([]);
-
   void initialize() {
     dio.options = BaseOptions(
       baseUrl: url.baseUrl,
       responseType: ResponseType.plain,
     );
   }
+
+  ValueNotifier<List<NoteModel>> noteListNotifier = ValueNotifier([]);
 
   @override
   Future<NoteModel?> createNote(NoteModel value) async {
@@ -96,7 +97,7 @@ class NoteApi implements ApiCalls {
         url.updateNote,
         data: value.toJson(),
       );
-      if(_response.data == null) {
+      if (_response.data == null) {
         return null;
       }
       final _jsonResponse = jsonDecode(_response.data);
@@ -104,6 +105,18 @@ class NoteApi implements ApiCalls {
     } catch (e) {
       print(e.toString());
       return null;
+    }
+  }
+
+  @override
+  Future<void> deleteNoteById(String id) async {
+    try {
+      final _response = await dio.delete('${url.deleteNote}/$id');
+      final _index = noteListNotifier.value.indexWhere((note) => note.id == id);
+      noteListNotifier.value.remove(_index);
+      noteListNotifier.notifyListeners();
+    } catch (e) {
+      print(e.toString());
     }
   }
 }

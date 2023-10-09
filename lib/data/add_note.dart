@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:note_app/data/data.dart';
 import 'package:note_app/data/note_model/note_model.dart';
@@ -101,7 +103,7 @@ class ScreenAddnote extends StatelessWidget {
   Future<void> editNote() async {
     final _updatedNote = NoteModel.create(
         id: id, title: _noteTitleInput.text, content: _noteContentInput.text);
-        
+
     await NoteApi().updateNote(_updatedNote);
     await NoteApi().getAllNotes();
     Navigator.of(_scaffoldKey.currentContext!).pop();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/data/add_note.dart';
+import 'package:note_app/data/data.dart';
 
 class NoteItem extends StatelessWidget {
   const NoteItem(
@@ -38,7 +39,7 @@ class NoteItem extends StatelessWidget {
               )),
               IconButton(
                 onPressed: () {
-                  print('delete button pressed');
+                  deleteNote(id);
                 },
                 icon: const Icon(
                   Icons.delete,
@@ -56,5 +57,10 @@ class NoteItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> deleteNote(String id) async {
+    await NoteApi().deleteNoteById(id);
+    await NoteApi().getAllNotes();
   }
 }
