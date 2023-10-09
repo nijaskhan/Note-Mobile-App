@@ -112,9 +112,6 @@ class NoteApi implements ApiCalls {
   Future<void> deleteNoteById(String id) async {
     try {
       final _response = await dio.delete('${url.deleteNote}/$id');
-      final _index = noteListNotifier.value.indexWhere((note) => note.id == id);
-      noteListNotifier.value.remove(_index);
-      noteListNotifier.notifyListeners();
     } catch (e) {
       print(e.toString());
     }
