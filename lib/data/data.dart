@@ -111,7 +111,7 @@ class NoteApi implements ApiCalls {
   @override
   Future<void> deleteNoteById(String id) async {
     try {
-      final _response = await dio.delete('${url.deleteNote}/$id');
+      await dio.delete('${url.deleteNote}/$id');
     } catch (e) {
       print(e.toString());
     }

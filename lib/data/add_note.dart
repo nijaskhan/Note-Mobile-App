@@ -64,7 +64,7 @@ class ScreenAddnote extends StatelessWidget {
               ),
               maxLines: null,
               minLines: 6,
-              maxLength: 100,
+              maxLength: 200,
             ),
             ElevatedButton.icon(
               style: const ButtonStyle(
