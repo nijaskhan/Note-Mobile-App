@@ -73,7 +73,7 @@ class ScreenAddnote extends StatelessWidget {
                     addNote();
                     break;
                   case ActionType.editNote:
-                    print('edit note clicked');
+                    editNote();
                     break;
                 }
               },
@@ -95,7 +95,15 @@ class ScreenAddnote extends StatelessWidget {
 
     await NoteApi().createNote(_newNote);
     await NoteApi().getAllNotes();
-    print("note saved");
+    Navigator.of(_scaffoldKey.currentContext!).pop();
+  }
+
+  Future<void> editNote() async {
+    final _updatedNote = NoteModel.create(
+        id: id, title: _noteTitleInput.text, content: _noteContentInput.text);
+        
+    await NoteApi().updateNote(_updatedNote);
+    await NoteApi().getAllNotes();
     Navigator.of(_scaffoldKey.currentContext!).pop();
   }
 }

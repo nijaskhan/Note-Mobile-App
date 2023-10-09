@@ -10,6 +10,7 @@ import 'package:note_app/data/url.dart';
 abstract class ApiCalls {
   Future<NoteModel?> createNote(NoteModel value);
   Future<List<NoteModel>> getAllNotes();
+  Future<NoteModel?> updateNote(NoteModel value);
 }
 
 class NoteApi implements ApiCalls {
@@ -82,6 +83,24 @@ class NoteApi implements ApiCalls {
       final _result =
           noteListNotifier.value.firstWhere((note) => note.id == id);
       return _result;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  @override
+  Future<NoteModel?> updateNote(NoteModel value) async {
+    try {
+      final _response = await dio.put(
+        url.updateNote,
+        data: value.toJson(),
+      );
+      if(_response.data == null) {
+        return null;
+      }
+      final _jsonResponse = jsonDecode(_response.data);
+      return NoteModel.fromJson(_jsonResponse as Map<String, dynamic>);
     } catch (e) {
       print(e.toString());
       return null;

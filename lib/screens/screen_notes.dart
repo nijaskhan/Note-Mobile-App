@@ -14,9 +14,6 @@ class ScreenNotes extends StatefulWidget {
 
 class _ScreenNotesState extends State<ScreenNotes> {
 
-  final content =
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Neque aliquam vestibulum morbi blandit cursus risus at ultrices mi. Bibendum est ultricies integer quis auctor elit. Volutpat lacus laoreet non curabitur gravida. Condimentum lacinia quis vel eros donec ac odio tempor orci. Mattis aliquam faucibus purus in massa tempor. Vulputate sapien nec sagittis aliquam. Vestibulum lorem sed risus ultricies tristique nulla. At risus viverra adipiscing at. Leo vel orci porta non. Convallis convallis tellus id interdum velit laoreet id donec ultrices. Vitae nunc sed velit dignissim sodales ut eu sem integer. Mauris a diam maecenas sed enim ut sem viverra aliquet.";
-
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
